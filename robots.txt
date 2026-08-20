@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.thebalminitiative.org/sitemap.xml
+Sitemap: https://www.thebalmhealthinitiative.org/sitemap.xml

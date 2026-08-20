@@ -52,7 +52,7 @@ Scroll progress bar · sticky header shrink · slide-in mobile nav with scrim ·
 - Open Graph + Twitter Card tags, canonical URLs, geo meta tags
 - `sitemap.xml` with priorities and `robots.txt`
 
-**Canonical URLs currently point to `https://www.thebalminitiative.org`.** If a different domain is registered, update the `SITE` constant and rebuild, or find-and-replace across all HTML files.
+**Canonical URLs currently point to `https://www.thebalmhealthinitiative.org`.** If a different domain is registered, update the `SITE` constant and rebuild, or find-and-replace across all HTML files.
 
 ## Known placeholders (not yet live)
 

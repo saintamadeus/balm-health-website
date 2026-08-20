@@ -656,7 +656,7 @@ table.tbl tr:hover td { background: var(--mist); }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-weight: 650; font-size: .89rem; margin-bottom: 7px; color: var(--ink-900); }
 .field input, .field select, .field textarea {
-  width: 100%; padding: 14px 16px; font-family: var(--font-body); font-size: .96rem;
+  width: 100%; padding: 14px 16px; font-family: var(--font-body); font-size: 16px;
   border: 1.5px solid var(--line); border-radius: var(--r-sm); background: var(--paper);
   color: var(--ink-900); transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
@@ -727,7 +727,7 @@ table.tbl tr:hover td { background: var(--mist); }
 }
 .copy-btn {
   background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
-  color: #fff; border-radius: 7px; padding: 4px 10px; font-size: .72rem;
+  color: #fff; border-radius: 7px; padding: 9px 14px; min-height: 36px; font-size: .74rem;
   font-weight: 600; cursor: pointer; font-family: var(--font-body);
   transition: background .2s var(--ease);
 }
@@ -873,4 +873,26 @@ table.tbl tr:hover td { background: var(--mist); }
   .card { padding: 24px; }
   .donate-panel { padding: 24px; }
   .slant-top, .slant-bottom { clip-path: none; margin-top: 0; padding-bottom: clamp(64px,8vw,104px); }
+
+  /* Reduce compositing cost of heavy blurs on low-end mobile GPUs */
+  .site-header { backdrop-filter: saturate(160%) blur(8px); -webkit-backdrop-filter: saturate(160%) blur(8px); }
+  .hero-card { backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px); }
+  .lightbox { backdrop-filter: blur(4px); }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  .container { padding: 0 18px; }
+  .hero-card, .donate-panel { padding: 20px; }
+  .cta-band { padding: 36px 22px; }
+  .hero-actions, .cta-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn, .cta-actions .btn { width: 100%; }
+  .statband { gap: 20px; }
+  .foot-bottom { flex-direction: column; align-items: flex-start; }
+  .bank dd { flex-wrap: wrap; }
+}
+
+/* ---------- Long-string overflow safety (account numbers, emails, addresses) ---------- */
+.bank dd, .reg-line, .cinfo p, .foot-bottom span {
+  overflow-wrap: break-word; word-break: break-word;
 }
