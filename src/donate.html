@@ -1,0 +1,159 @@
+title: Donate to The Balm | Support a Registered Health NGO in Nigeria
+description: Give to The Balm Health Initiative by bank transfer. Use your personal reference code, tell us you've given, and we'll confirm and thank you within 3 working days.
+nav: donate
+---
+  <div class="page-hero">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &rsaquo; Donate</p>
+      <span class="kicker">Donate</span>
+      <h1>Give with <em>confidence</em></h1>
+      <p class="lead">Your gift goes straight into care for people who can&rsquo;t afford it. Four simple steps, and we&rsquo;ll personally confirm we received it.</p>
+    </div>
+  </div>
+
+<main id="main">
+  <section id="give">
+    <div class="container">
+      <div class="split top">
+        <div class="rv">
+          <h2 class="mt0">How to give</h2>
+          <ol class="give-steps">
+            <li><div><strong>Transfer any amount to our account</strong><span>Use your bank app, USSD or a bank branch.</span></div></li>
+            <li><div><strong>Put your reference code in the description</strong><span>It&rsquo;s shown below and is unique to you. It helps us match your gift.</span></div></li>
+            <li><div><strong>Tell us you&rsquo;ve given</strong><span>Fill the short form on this page. It takes under a minute.</span></div></li>
+            <li><div><strong>We confirm and thank you</strong><span>Within 3 working days, once the money shows on our bank statement.</span></div></li>
+          </ol>
+
+          <div class="bank">
+            <h3 class="mt0">{{icon:bank}} Our bank account</h3>
+            <dl>
+              <div><dt>Account name</dt><dd>The Balm Health Initiative and Social Interventions (TBHISI)</dd></div>
+              <div><dt>Account number</dt><dd class="acct">1312023013 <button type="button" class="copy-btn" data-copy="1312023013">{{icon:copy}} <span>Copy</span></button></dd></div>
+              <div><dt>Bank</dt><dd>Zenith Bank PLC</dd></div>
+            </dl>
+            <div class="refbox">
+              <div class="lbl">Your reference code</div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <span class="code" data-ref-code>BALM-····</span>
+                <button type="button" class="copy-btn" data-copy="@ref">{{icon:copy}} <span>Copy</span></button>
+              </div>
+              <p>Type this in the transfer &ldquo;description&rdquo; or &ldquo;narration&rdquo; box.</p>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <span class="trust-chip">{{icon:shield}} CAC registered &middot; RN 9000092</span>
+            <span class="trust-chip">{{icon:check}} SCUML registered</span>
+            <span class="trust-chip">{{icon:file}} <a href="financial-transparency.html">See our certificates</a></span>
+          </div>
+        </div>
+
+        <form class="panel rv" name="gift-confirmation" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-form
+              data-success="Thank you! We’ve got your details. We’ll confirm your gift by email within 3 working days." novalidate>
+          <input type="hidden" name="form-name" value="gift-confirmation">
+          <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <h3>I&rsquo;ve sent a gift</h3>
+          <p class="muted" style="font-size:.95rem">Tell us about your transfer so we can match it and thank you.</p>
+
+          <div class="field">
+            <label for="g-name">Full name</label>
+            <input type="text" id="g-name" name="name" autocomplete="name" required data-msg="Please enter your name.">
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="g-email">Email address</label>
+            <input type="email" id="g-email" name="email" autocomplete="email" required data-msg="Please enter your email.">
+            <span class="err"></span>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="g-amount">Amount sent (&#8358;)</label>
+              <input type="number" id="g-amount" name="amount" min="100" inputmode="numeric" required data-amount-field data-msg="Please enter the amount.">
+              <span class="err"></span>
+            </div>
+            <div class="field">
+              <label for="g-date">Date of transfer</label>
+              <input type="date" id="g-date" name="transfer_date" required data-today data-msg="Please pick the date.">
+              <span class="err"></span>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="g-ref">Reference code</label>
+              <input type="text" id="g-ref" name="reference" readonly data-ref-code>
+            </div>
+            <div class="field">
+              <label for="g-phone">Phone <span class="opt">(optional)</span></label>
+              <input type="tel" id="g-phone" name="phone" autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="g-for">I&rsquo;d like my gift to support</label>
+            <select id="g-for" name="designation">
+              <option>Wherever it&rsquo;s needed most</option>
+              <option>Reach the Sick (hospital visits)</option>
+              <option>OPTRTE (crisis to independence)</option>
+              <option>The Balm Basket (family support)</option>
+              <option>Mental health &amp; counselling</option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" name="monthly" value="yes"> I&rsquo;ve set up a monthly standing order</label>
+          <label class="check"><input type="checkbox" name="updates" value="yes"> Send me occasional updates on what my gift did</label>
+
+          <button type="submit" class="btn btn-primary" style="width:100%">Confirm my gift {{icon:arrow}}</button>
+          <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+          <p class="small-print" style="margin-top:12px">We only use these details to confirm and thank you. <a href="privacy-policy.html">Privacy policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-white">
+    <div class="container">
+      <div class="sec-head rv">
+        <span class="kicker">Where it goes</span>
+        <h2>What a gift is planned to cover</h2>
+      </div>
+      <div class="tiers rv-stagger">
+        <div class="tier"><div class="amt">&#8358;5,000</div><p class="mb0">Medical help and a hospital referral for one patient.</p></div>
+        <div class="tier featured"><span class="flag">Most lasting</span><div class="amt">&#8358;25,000</div><p class="mb0">A full series of counselling sessions for one person.</p></div>
+        <div class="tier"><div class="amt">&#8358;50,000</div><p class="mb0">Helps run a community health outreach day.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-mist">
+    <div class="container narrow">
+      <div class="sec-head rv">
+        <span class="kicker">Questions</span>
+        <h2>Before you give</h2>
+      </div>
+      <div class="rv" data-acc-group>
+        <div class="acc">
+          <button class="acc-btn" type="button">How do I know you received my money? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>After you fill the form above, our team checks the bank statement for your reference code and amount. When it matches, we email you a written acknowledgement &mdash; usually within 3 working days. If you don&rsquo;t hear from us, <a href="contact.html">contact us</a> and we&rsquo;ll look into it.</p></div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-btn" type="button">Can I give every month? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>Yes &mdash; and it helps us most, because we can plan ahead. Set up a standing order in your bank app to our account, use the same reference code each time, and tick &ldquo;monthly standing order&rdquo; on the form once.</p></div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-btn" type="button">Can I pay by card or from outside Nigeria? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>Card and online payments are coming soon. Until then, if you&rsquo;re abroad or prefer another method, <a href="contact.html">contact us</a> and we&rsquo;ll arrange it with you directly.</p></div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-btn" type="button">How will my gift be used? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>Gifts fund our programs: medical help, counselling, family support and community outreach. If you choose a program on the form, your gift is tracked against it. Once our first financial year closes, we will publish exactly how money was spent on our <a href="financial-transparency.html">transparency page</a>.</p></div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-btn" type="button">Is The Balm a registered organisation? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>Yes. We are registered with the Corporate Affairs Commission as Incorporated Trustees under Part F of CAMA 2020 (RN 9000092), and with SCUML under the EFCC. You can view both certificates on our <a href="financial-transparency.html">transparency page</a>.</p></div></div>
+        </div>
+        <div class="acc">
+          <button class="acc-btn" type="button">Someone asked me to send money to a different account. Is that you? {{icon:plus}}</button>
+          <div class="acc-panel"><div class="acc-panel-inner"><p>No. We only ever use the Zenith Bank account shown on this page, in the name of The Balm Health Initiative and Social Interventions (TBHISI). If anyone asks you to pay into a personal or different account in our name, please don&rsquo;t &mdash; and <a href="contact.html">tell us</a>.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
