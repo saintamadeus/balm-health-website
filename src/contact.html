@@ -1,0 +1,73 @@
+title: Contact Us | The Balm Health Initiative, Ota, Ogun State
+description: Contact The Balm Health Initiative and Social Intervention in Ota, Ogun State — phone, email and a message form for volunteering, partnerships, gifts and safeguarding concerns.
+nav: contact
+---
+  <div class="page-hero">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &rsaquo; Contact</p>
+      <span class="kicker">Contact</span>
+      <h1>Let&rsquo;s <em>talk</em></h1>
+      <p class="lead">Questions, volunteering, partnerships, or a safeguarding concern &mdash; reach our team in Ota directly. We reply within a few working days.</p>
+    </div>
+  </div>
+
+<main id="main">
+  <section>
+    <div class="container contact-grid">
+      <div class="rv">
+        <div class="cinfo">
+          <div class="ibadge">{{icon:pin}}</div>
+          <div><h3>Visit</h3><p>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State, Nigeria</p></div>
+        </div>
+        <div class="cinfo">
+          <div class="ibadge coral">{{icon:phone}}</div>
+          <div><h3>Call</h3><p><a href="tel:+2349078524319">+234 907 852 4319</a></p></div>
+        </div>
+        <div class="cinfo">
+          <div class="ibadge amber">{{icon:mail}}</div>
+          <div><h3>Email</h3><p><a href="mailto:thebalmhealthinitiative@gmail.com">thebalmhealthinitiative@gmail.com</a></p></div>
+        </div>
+        <div class="callout coral">
+          <p><strong>Safeguarding concern?</strong> Call or email us and mark your message &ldquo;Safeguarding&rdquo;. Every report is taken seriously and handled in confidence. Read our <a href="safeguarding-policy.html">Safeguarding Policy</a>.</p>
+        </div>
+      </div>
+
+      <form class="panel rv" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-form
+            data-success="Message sent — thank you. We usually reply within a few working days." novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <h3>Send us a message</h3>
+        <div class="row2">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required data-msg="Please enter your name.">
+            <span class="err"></span>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" autocomplete="email" required data-msg="Please enter your email.">
+            <span class="err"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="reason">This is about</label>
+          <select id="reason" name="reason">
+            <option>General question</option>
+            <option>Volunteering</option>
+            <option>Partnership</option>
+            <option>A gift or donation</option>
+            <option>Safeguarding concern</option>
+            <option>Media or press</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required data-msg="Please write a message."></textarea>
+          <span class="err"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Send message {{icon:send}}</button>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</main>

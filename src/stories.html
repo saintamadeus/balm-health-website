@@ -1,0 +1,120 @@
+title: Stories & Updates | The Balm Health Initiative Nigeria
+description: News, milestones and stories from The Balm Health Initiative and Social Intervention — told honestly, with consent, and with real numbers.
+nav: stories
+---
+  <div class="page-hero">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &rsaquo; Stories</p>
+      <span class="kicker">Stories &amp; updates</span>
+      <h1>Stories from <em>the ground</em></h1>
+      <p class="lead">This is where we&rsquo;ll share what happens on every outreach &mdash; who we met, what changed, and what it cost. We&rsquo;re just getting started, so here&rsquo;s the story so far.</p>
+    </div>
+  </div>
+
+<main id="main">
+  <section>
+    <div class="container">
+      <div class="split top">
+        <div class="rv">
+          <span class="kicker">Our journey so far</span>
+          <h2>From an idea to a registered organisation</h2>
+          <p class="lead">Every step below is real and checkable. We&rsquo;ll keep adding to it.</p>
+          <a class="text-link" href="financial-transparency.html">See our registration papers {{icon:arrow}}</a>
+        </div>
+        <ol class="timeline rv">
+          <li>
+            <span class="tdot">{{icon:file}}</span>
+            <span class="date">17 November 2025</span>
+            <h3>Registered with the CAC</h3>
+            <p>The Balm is incorporated as Incorporated Trustees under Part F of CAMA 2020, with a seven-member Board of Trustees.</p>
+          </li>
+          <li>
+            <span class="tdot">{{icon:shield}}</span>
+            <span class="date">18 December 2025</span>
+            <h3>Registered with SCUML</h3>
+            <p>We complete registration with the Special Control Unit Against Money Laundering under the EFCC, and obtain our Tax Identification Number.</p>
+          </li>
+          <li>
+            <span class="tdot">{{icon:globe}}</span>
+            <span class="date">2026</span>
+            <h3>Website goes live</h3>
+            <p>We publish our programs, leadership, policies and certificates so anyone can check who we are before they give.</p>
+          </li>
+          <li class="next">
+            <span class="tdot">{{icon:flag}}</span>
+            <span class="date">Coming next</span>
+            <h3>Our first Reach the Sick visit</h3>
+            <p>Our first hospital visit is being planned. When it happens, the story will appear right here.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    HOW TO ADD A STORY (for whoever updates the site):
+    1. Copy the block below into src/stories.html, inside the "stories-grid" div.
+    2. Put the photo in assets/images/stories/ and change the src.
+    3. Only publish photos of people who agreed in writing (see safeguarding policy).
+    4. Run: python build.py
+
+    <article class="story-card">
+      <div class="frame"><img src="assets/images/stories/YOUR-PHOTO.jpg" alt="Describe the photo" loading="lazy"></div>
+      <div class="body">
+        <p class="meta">REACH THE SICK &middot; MARCH 2027</p>
+        <h3>Story headline</h3>
+        <p>Two or three sentences about what happened and what changed.</p>
+      </div>
+    </article>
+  -->
+
+  <section class="sec-white" id="how-we-tell-stories">
+    <div class="container">
+      <div class="sec-head rv">
+        <span class="kicker">Our promise</span>
+        <h2>How we will tell people&rsquo;s stories</h2>
+        <p>The people we serve are not props. These rules apply to every photo and word we publish.</p>
+      </div>
+      <div class="promise rv-stagger">
+        <div class="card">
+          <div class="ibadge">{{icon:check}}</div>
+          <h3>Consent first</h3>
+          <p>No photo or story goes up without written permission &mdash; from a parent or guardian for children. Anyone can ask us to take theirs down.</p>
+        </div>
+        <div class="card">
+          <div class="ibadge coral">{{icon:heart}}</div>
+          <h3>Dignity, not pity</h3>
+          <p>We show people as they are &mdash; strong, capable, going through a hard time. We change names when someone prefers privacy.</p>
+        </div>
+        <div class="card">
+          <div class="ibadge amber">{{icon:chart}}</div>
+          <h3>Real numbers</h3>
+          <p>Every update says how many people were reached and what it cost. If something didn&rsquo;t work, we&rsquo;ll say that too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="updates rv">
+        <div>
+          <span class="kicker">Be the first to know</span>
+          <h2>Get the first story in your inbox</h2>
+          <p>We&rsquo;ll email you when our first outreach happens &mdash; and a few times a year after that. Nothing more.</p>
+        </div>
+        <form name="updates" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-form data-success="You’re on the list. Thank you!" novalidate>
+          <input type="hidden" name="form-name" value="updates">
+          <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="field">
+            <label for="s-email">Email address</label>
+            <input type="email" id="s-email" name="email" autocomplete="email" required data-msg="Please enter your email.">
+            <span class="err"></span>
+          </div>
+          <button type="submit" class="btn btn-dark">Keep me updated {{icon:send}}</button>
+          <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>

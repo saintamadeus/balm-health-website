@@ -1,0 +1,5 @@
+# Found a security problem on this website? Please tell us privately.
+Contact: mailto:thebalmhealthinitiative@gmail.com
+Expires: 2027-10-03T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.thebalmhealthinitiative.org/.well-known/security.txt
