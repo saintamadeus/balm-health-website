@@ -56,7 +56,7 @@ ${canonical}<meta name="robots" content="${robots}">
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="assets/js/main.js"></script>
 ${extraHead}</head>
-<body>
+<body class="page-${file.replace(/\.html$/, "")}">
 `;
 }
 
@@ -87,9 +87,16 @@ ${links}
 `;
 }
 
+/** Pages where someone may need help: they get a floating WhatsApp button and no donate bar. */
+const HELP_PAGES = new Set(["help", "contact"]);
+
 export function footer(active: string): string {
+  const waFloat = HELP_PAGES.has(active)
+    ? `
+<a class="wa-float" href="${whatsappLink("Hello The Balm, I would like to talk to someone.")}" rel="noopener">${icon("whatsapp")}<span>WhatsApp us</span></a>`
+    : "";
   const giveBar =
-    active === "donate" || active === "404"
+    active === "donate" || active === "404" || active === "help"
       ? ""
       : `
 <aside class="give-bar" aria-label="Donate">
@@ -149,6 +156,7 @@ export function footer(active: string): string {
       <span>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State</span>
     </div>
   </div>
+${waFloat}
 </footer>
 ${giveBar}
 `;

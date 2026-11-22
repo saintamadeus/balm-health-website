@@ -248,14 +248,11 @@ nav.main-nav a[aria-current="page"] { background: var(--sage-100); color: var(--
 .text-link:hover .icon { transform: translateX(4px); }
 
 /* ---------- Sections ---------- */
-section { padding: clamp(68px, 9vw, 120px) 0; position: relative; }
-.sec-sand { background: var(--sand); }
-.sec-mist, .sec-sage { background: var(--sage-50); }
-.sec-white { background: var(--paper); }
+section { padding: clamp(56px, 7.5vw, 100px) 0; position: relative; }
 .sec-tight { padding: clamp(40px, 5vw, 64px) 0; }
 
 .sec-dark {
-  background: var(--forest-900); color: var(--ink-300);
+  color: var(--ink-300);
   position: relative; overflow: hidden;
 }
 .sec-dark h1, .sec-dark h2, .sec-dark h3, .sec-dark h4 { color: #fff; }
@@ -264,7 +261,7 @@ section { padding: clamp(68px, 9vw, 120px) 0; position: relative; }
 .sec-dark a:not(.btn) { color: var(--sage-200); }
 .sec-dark a:not(.btn):hover { color: var(--ochre-500); }
 .sec-dark::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
+  content: ""; position: absolute; inset: var(--fade) 0 0 0; pointer-events: none;
   background:
     radial-gradient(900px 460px at 10% -10%, rgba(142, 201, 103, .16), transparent 62%),
     radial-gradient(700px 420px at 92% 110%, rgba(227, 161, 60, .12), transparent 60%);
@@ -410,6 +407,11 @@ section { padding: clamp(68px, 9vw, 120px) 0; position: relative; }
   font-size: .75rem; font-weight: 700; letter-spacing: .04em;
   padding: 7px 13px; border-radius: 999px;
 }
+
+/* Drawn scenes for the programs (stand-ins until real photos exist) */
+.scene { position: absolute; inset: 0; }
+.scene svg { display: block; width: 100%; height: 100%; transition: transform 1.2s var(--ease); }
+.frame:hover .scene svg, .prog-card:hover .scene svg { transform: scale(1.04); }
 
 /* Image failed to load → hide it so the art behind shows (set by main.js) */
 img.img-missing { visibility: hidden; }
@@ -601,7 +603,7 @@ a.card { text-decoration: none; }
 
 /* ---------- Page hero ---------- */
 .page-hero {
-  background: var(--forest-900); color: #fff; position: relative; overflow: hidden;
+  color: #fff; position: relative; overflow: hidden;
   padding: clamp(60px, 7vw, 100px) 0 clamp(56px, 6vw, 86px);
 }
 .page-hero::before {
@@ -623,6 +625,75 @@ a.card { text-decoration: none; }
 .crumb { font-size: .86rem; color: rgba(255,255,255,.6); margin-bottom: 18px; }
 .crumb a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); }
 .crumb a:hover { color: var(--ochre-500); }
+
+/* ======================================================================
+   Blended sections
+   Each section knows its own colour (--self) and the colour of the section
+   above it (--prev), and fades from one into the other at its top edge.
+   So there are no hard lines between sections, whatever order they're in.
+   ====================================================================== */
+:root { --fade: clamp(72px, 10vw, 150px); }
+section, .page-hero, .trust-strip { --self: var(--cream); --prev: var(--self); }
+.sec-white { --self: var(--paper); }
+.sec-sand { --self: var(--sand); }
+.sec-mist, .sec-sage { --self: var(--sage-50); }
+.sec-dark, .page-hero { --self: var(--forest-900); }
+
+/* what sits above each section */
+section + *, .trust-strip + * { --prev: var(--cream); }
+.sec-white + * { --prev: var(--paper); }
+.sec-sand + * { --prev: var(--sand); }
+:is(.sec-mist, .sec-sage) + * { --prev: var(--sage-50); }
+:is(.sec-dark, .page-hero) + * { --prev: var(--forest-900); }
+
+section, .page-hero { background: linear-gradient(var(--prev), var(--self) var(--fade)); }
+
+/* the footer fades out of whatever the last section was */
+.site-footer { --prev: var(--cream); background: linear-gradient(var(--prev), var(--forest-950) clamp(48px, 6vw, 80px)); padding-top: clamp(80px, 9vw, 120px); }
+main:has(> section:last-of-type.sec-white) + .site-footer { --prev: var(--paper); }
+main:has(> section:last-of-type.sec-sand) + .site-footer { --prev: var(--sand); }
+main:has(> section:last-of-type:is(.sec-mist, .sec-sage)) + .site-footer { --prev: var(--sage-50); }
+main:has(> section:last-of-type.sec-dark) + .site-footer { --prev: var(--forest-900); }
+.site-footer::before { top: clamp(48px, 6vw, 80px); }
+
+/* ---------- Cards that sit across two sections ---------- */
+/* Home: the trust strip floats over the bottom of the hero */
+.trust-strip { background: transparent; border: 0; padding: 0; position: relative; z-index: 2; margin-top: calc(-1 * clamp(44px, 5vw, 64px)); }
+.trust-strip .trust-items {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+  padding: 20px clamp(18px, 3vw, 32px); box-shadow: var(--sh-md);
+}
+/* Inner pages: the first card or note after the dark header rises up over it */
+.page-hero:has(+ .lift) { padding-bottom: clamp(88px, 10vw, 130px); }
+.lift { padding-top: 0 !important; }
+.lift > .container > :first-child { position: relative; z-index: 2; margin-top: calc(-1 * clamp(44px, 5vw, 64px)); box-shadow: var(--sh-md); }
+.lift > .container > .grid:first-child { box-shadow: none; }
+.lift > .container > .grid:first-child > * { box-shadow: var(--sh-md); }
+
+/* ---------- Home: one background that slowly changes as you scroll ---------- */
+/* A tall gradient sits behind the page and slides up as you scroll, so the
+   colour shifts from cream to soft green to sand. Only moving (not repainting)
+   it keeps scrolling smooth on cheaper phones. Browsers without scroll-linked
+   animation simply keep the cream at the top. */
+body.page-index section:not(.sec-dark) { --self: transparent; }
+body.page-index section + section:not(.sec-dark) { --prev: transparent; }
+body.page-index section.sec-dark + section { --prev: var(--forest-900); }
+body.page-index section + section.sec-dark, body.page-index .trust-strip + section { --prev: transparent; }
+body.page-index::before {
+  content: ""; position: fixed; left: 0; right: 0; top: 0; height: 400vh; z-index: -1; pointer-events: none;
+  background: linear-gradient(var(--cream) 0%, var(--cream) 8%, var(--sage-50) 35%, var(--sand) 65%, var(--ochre-50) 100%);
+}
+@supports (animation-timeline: scroll()) {
+  body.page-index::before { animation: home-shift linear both; animation-timeline: scroll(root block); }
+}
+@keyframes home-shift { to { transform: translateY(-300vh); } }
+
+/* ---------- Faint paper texture over the whole page ---------- */
+/* One tiny noise image, fixed in place, at very low strength. */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 3000; pointer-events: none; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .15 0 0 0 0 .1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* ---------- Prose ---------- */
 .prose { max-width: 780px; }
@@ -956,7 +1027,7 @@ table.tbl tr:hover td { background: var(--sage-50); }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--forest-950); color: var(--ink-300);
+  color: var(--ink-300);
   padding: clamp(60px, 7vw, 90px) 0 30px; position: relative; overflow: hidden;
 }
 .site-footer::before {
@@ -1012,25 +1083,85 @@ table.tbl tr:hover td { background: var(--sage-50); }
 .give-bar { display: none; }
 
 /* ---------- Reveal on scroll ---------- */
-/* Failsafe: if the script hasn't set up the fade-in within 2.5s (slow or broken script),
-   show everything anyway. The script adds .reveal-ready once fade-in is working. */
-.js:not(.reveal-ready) .rv,
-.js:not(.reveal-ready) .rv-stagger > * { animation: rv-failsafe .5s ease 2.5s forwards; }
+/* Newer browsers (Chrome, Edge, Safari 26+): the browser itself fades each block in as it
+   scrolls into view. Smooth on cheap phones, and nothing is ever hidden by a script. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rv, .rv-stagger > * {
+      animation: rv-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+@keyframes rv-in { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+/* Other browsers: the script fades blocks in (adds .in). If the script hasn't set that up
+   within 2.5s (slow or broken), everything shows anyway. */
+@supports not (animation-timeline: view()) {
+  .js:not(.reveal-ready) .rv,
+  .js:not(.reveal-ready) .rv-stagger > * { animation: rv-failsafe .5s ease 2.5s forwards; }
+  .js .rv { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
+  .js .rv-stagger > * { opacity: 0; transform: translateY(22px); }
+  .js .rv-stagger.in > * { animation: fadeUp .7s var(--ease) both; }
+  .rv-stagger.in > *:nth-child(2) { animation-delay: .08s; }
+  .rv-stagger.in > *:nth-child(3) { animation-delay: .16s; }
+  .rv-stagger.in > *:nth-child(4) { animation-delay: .24s; }
+  .rv-stagger.in > *:nth-child(5) { animation-delay: .32s; }
+  .rv-stagger.in > *:nth-child(6) { animation-delay: .4s; }
+  .rv-stagger.in > *:nth-child(n+7) { animation-delay: .46s; }
+}
 @keyframes rv-failsafe { to { opacity: 1; transform: none; } }
-.js .rv { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-.js .rv.in { opacity: 1; transform: none; }
-.js .rv-stagger > * { opacity: 0; transform: translateY(22px); }
-.js .rv-stagger.in > * { animation: fadeUp .7s var(--ease) both; }
-.rv-stagger.in > *:nth-child(2) { animation-delay: .08s; }
-.rv-stagger.in > *:nth-child(3) { animation-delay: .16s; }
-.rv-stagger.in > *:nth-child(4) { animation-delay: .24s; }
-.rv-stagger.in > *:nth-child(5) { animation-delay: .32s; }
-.rv-stagger.in > *:nth-child(6) { animation-delay: .4s; }
-.rv-stagger.in > *:nth-child(n+7) { animation-delay: .46s; }
 @media (prefers-reduced-motion: reduce) {
-  .js .rv, .js .rv-stagger > * { opacity: 1; transform: none; }
+  .js .rv, .js .rv-stagger > * { opacity: 1 !important; transform: none !important; }
   .hero-badge, .hero-leaf { animation: none; }
 }
+
+/* ---------- Smooth page-to-page changes ---------- */
+/* Chrome, Edge and Safari cross-fade from one page to the next. Others just load normally. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+.site-header { view-transition-name: site-header; }  /* the header stays put while the page changes */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+
+/* ---------- Button and form feedback ---------- */
+.btn:active, .header-cta:active { transform: translateY(0) scale(.97) !important; }
+@media (prefers-reduced-motion: no-preference) {
+  :is(.btn, .header-cta):hover .icon-heart, :is(.btn, .header-cta):focus-visible .icon-heart { animation: heartbeat 1s ease-in-out infinite; }
+}
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.28); } 45% { transform: scale(.94); } 65% { transform: scale(1.12); } }
+/* a green tick appears inside a field once it's filled in correctly */
+.field input.is-valid {
+  border-color: var(--green-600); padding-right: 44px;
+  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232C7A4C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7'/%3E%3C/svg%3E") no-repeat right 14px center / 18px 18px;
+}
+.field input[readonly].is-valid { background-color: var(--sage-50); }
+.form-status.success { display: none; align-items: center; gap: 10px; }
+.form-status.success.show { display: flex; }
+.form-status.success::before {
+  content: ""; flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--green-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4L18 8'/%3E%3C/svg%3E") no-repeat center / 16px 16px;
+  animation: pop-in .45s var(--ease) both;
+}
+@keyframes pop-in { from { transform: scale(0); } 70% { transform: scale(1.15); } to { transform: scale(1); } }
+
+/* ---------- Floating WhatsApp button (Get Help + Contact) ---------- */
+.wa-float {
+  position: fixed; right: 24px; bottom: 24px; z-index: 940;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--green-600); color: #fff; text-decoration: none; font-weight: 700;
+  padding: 14px 20px 14px 16px; border-radius: 999px; box-shadow: 0 12px 30px rgba(15, 46, 34, .3);
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.wa-float:hover { background: var(--green-700); color: #fff; transform: translateY(-2px); }
+.wa-float .icon { width: 24px; height: 24px; }
+@media (prefers-reduced-motion: no-preference) {
+  .wa-float { animation: wa-hello .6s var(--ease) 1.2s both; }
+}
+@keyframes wa-hello { from { transform: translateY(20px) scale(.8); opacity: 0; } to { transform: none; opacity: 1; } }
+body:has(.wa-float) .to-top { bottom: 96px; }
 
 /* ---------- Utilities ---------- */
 /* Read out by screen readers, invisible on screen */
@@ -1104,6 +1235,11 @@ table.tbl tr:hover td { background: var(--sage-50); }
   .give-bar span { font-size: .9rem; font-weight: 600; }
   .give-bar .btn { padding: 11px 20px; font-size: .92rem; }
   .to-top { bottom: 86px; }
+  .wa-float { padding: 14px; bottom: 16px; right: 16px; }
+  .wa-float span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  body:has(.give-bar) .wa-float { bottom: 84px; }
+  body:has(.wa-float) .to-top { bottom: 92px; }
+  body:has(.give-bar):has(.wa-float) .to-top { bottom: 152px; }
 }
 
 @media (max-width: 620px) {
@@ -1131,6 +1267,7 @@ table.tbl tr:hover td { background: var(--sage-50); }
 .bank dd, .reg-line, .cinfo p, .foot-bottom span { overflow-wrap: anywhere; }
 
 @media print {
+  body::before, body::after { display: none !important; }
   .site-header, .site-footer, .to-top, .give-bar, .cta-band { display: none !important; }
   body { background: #fff; }
   .js .rv, .js .rv-stagger > * { opacity: 1 !important; transform: none !important; }

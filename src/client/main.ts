@@ -32,6 +32,11 @@
 
     /* ---------- Reveal on scroll ---------- */
     safely("reveal", () => {
+      // Newer browsers fade blocks in by themselves (see style.css); nothing to do here.
+      if (window.CSS && CSS.supports("animation-timeline: view()")) {
+        root.classList.add("reveal-ready");
+        return;
+      }
       const revealEls = $$(".rv, .rv-stagger");
       if ("IntersectionObserver" in window && !reduceMotion) {
         const ro = new IntersectionObserver(
@@ -376,7 +381,20 @@
           input.removeAttribute("aria-invalid");
           errorFor(input)?.classList.remove("show");
         };
-        $$<Field>("input, textarea, select", form).forEach((i) => i.addEventListener("input", () => clearErr(i)));
+        // A green tick once a field is filled in correctly (CSS draws it).
+      const markValid = (input: Field): void => {
+        if (!(input instanceof HTMLInputElement) || ["hidden", "checkbox", "radio"].includes(input.type)) return;
+        const value = input.value.trim();
+        const ok = value !== "" && (input.type !== "email" || EMAIL.test(value)) && input.checkValidity();
+        input.classList.toggle("is-valid", ok);
+      };
+      $$<Field>("input, textarea, select", form).forEach((i) => {
+        i.addEventListener("input", () => {
+          clearErr(i);
+          markValid(i);
+        });
+        if (i instanceof HTMLInputElement && i.value && !i.readOnly) markValid(i);
+      });
 
         const setStatus = (kind: "pending" | "success" | "error", text: string): void => {
           if (!statusEl) return;

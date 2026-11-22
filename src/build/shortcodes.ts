@@ -1,5 +1,6 @@
 import { EMAIL, PHONE, PHONE_TEL, SAFEGUARDING_LEAD, whatsappLink } from "./config.js";
 import { icon } from "./icons.js";
+import { scene } from "./scenes.js";
 
 /** The colours an art panel can use. Each maps to a CSS class `art-<colour>`. */
 const ART_COLOURS = ["green", "coral", "ochre", "forest"] as const;
@@ -46,6 +47,7 @@ const VALUES: Readonly<Record<string, string>> = {
  * Expands shortcodes in a page body:
  *   {{icon:NAME}}               an inline icon
  *   {{art:COLOUR:ICON:Label}}   a placeholder art panel (label optional)
+ *   {{scene:NAME:Label}}        a drawn scene: hospital, journey, basket, summit (label optional)
  *   {{phone}} {{tel}} {{email}} {{mailto}} {{whatsapp}}   contact details from config.ts
  *   {{whatsapp:Message text}}   a WhatsApp link with a message already typed in
  *   {{safeguarding-lead}} {{safeguarding-role}}
@@ -55,6 +57,7 @@ export function expandShortcodes(body: string): string {
     .replace(/\{\{whatsapp:([^}]+)\}\}/g, (_m, message: string) => attr(whatsappLink(message.trim())))
     .replace(/\{\{([a-z-]+)\}\}/g, (m, key: string) => VALUES[key] ?? m)
     .replace(/\{\{icon:(\w+)\}\}/g, (_m, name: string) => icon(name))
+    .replace(/\{\{scene:(\w+):?([^}]*)\}\}/g, (_m, name: string, label: string) => scene(name, label))
     .replace(/\{\{art:(\w+):(\w+):?([^}]*)\}\}/g, (_m, colour: string, name: string, label: string) =>
       art(colour, name, label),
     );

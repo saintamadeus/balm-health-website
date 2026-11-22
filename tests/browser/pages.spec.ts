@@ -8,6 +8,8 @@ const PAGES = readdirSync("src/pages").filter((f) => f.endsWith(".html"));
 for (const page of PAGES) {
   test.describe(page, () => {
     test("has no accessibility failures", async ({ page: p }) => {
+      // Check the finished colours, not blocks caught half-way through fading in.
+      await p.emulateMedia({ reducedMotion: "reduce" });
       await p.goto(`/${page}`);
       // Show every section as if the visitor had scrolled through the page.
       await p.evaluate(() => document.querySelectorAll(".rv, .rv-stagger").forEach((e) => e.classList.add("in")));
@@ -41,8 +43,15 @@ test("content still appears if the script breaks", async ({ page: p }) => {
   });
   await p.goto("/about.html");
   await p.waitForTimeout(3500);
-  const hidden = await p.evaluate(() =>
-    Array.from(document.getElementsByClassName("rv")).filter((e) => getComputedStyle(e).opacity === "0").length,
-  );
-  expect(hidden).toBe(0);
+  // Scroll to each block in turn (blocks fade in as they come into view) and check it shows.
+  const count = await p.locator(".rv").count();
+  const hidden: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const block = p.locator(".rv").nth(i);
+    await block.evaluate((e) => e.scrollIntoView({ block: "center", behavior: "instant" }));
+    await p.waitForTimeout(250);
+    const opacity = Number(await block.evaluate((e) => getComputedStyle(e).opacity));
+    if (opacity < 0.5) hidden.push(i);
+  }
+  expect(hidden, "blocks that stayed hidden").toEqual([]);
 });

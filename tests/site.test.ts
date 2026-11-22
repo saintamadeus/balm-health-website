@@ -120,6 +120,25 @@ describe("every page", () => {
   });
 });
 
+describe("look and feel", () => {
+  test("style sheet turns on page transitions, browser fade-ins and section blending", async () => {
+    const css = await readFile(join(out, "assets", "css", "style.css"), "utf8");
+    assert.match(css, /@view-transition\s*\{\s*navigation:\s*auto;/);
+    assert.match(css, /animation-timeline:\s*view\(\)/);
+    assert.match(css, /background:\s*linear-gradient\(var\(--prev\), var\(--self\)/);
+    assert.match(css, /prefers-reduced-motion: no-preference/);
+  });
+
+  test("program pictures are drawn scenes, not placeholder icons", () => {
+    const count = (file: string): number => (html.get(file)!.match(/class="scene scene-/g) ?? []).length;
+    assert.equal(count("index.html"), 3, "home page program cards");
+    assert.equal(count("programs.html"), 4, "programs page");
+    for (const file of ["index.html", "programs.html"]) {
+      assert.ok(!/art art-(coral|ochre|forest)/.test(html.get(file)!), `${file}: still uses icon panels`);
+    }
+  });
+});
+
 describe("forms", () => {
   test("every form is set up for Netlify Forms with a spam trap", () => {
     let forms = 0;
@@ -163,6 +182,17 @@ describe("help and contact details", () => {
       assert.match(footer, /href="https:\/\/wa\.me\//, `${file}: footer WhatsApp`);
       assert.match(footer, /href="mailto:/, `${file}: footer email`);
     }
+  });
+
+  test("the floating WhatsApp button is on Get Help and Contact only", () => {
+    for (const [file, text] of html) {
+      const has = text.includes('class="wa-float"');
+      assert.equal(has, file === "get-help.html" || file === "contact.html", `${file}: WhatsApp button`);
+    }
+  });
+
+  test("Get Help shows no donate bar to people looking for help", () => {
+    assert.ok(!html.get("get-help.html")!.includes('class="give-bar"'));
   });
 
   test("the safeguarding page names who receives reports", () => {

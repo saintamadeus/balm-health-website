@@ -51,5 +51,5 @@ export function isIconName(name: string): name is IconName {
 /** An inline SVG icon. Throws on an unknown name so typos fail the build. */
 export function icon(name: string, cls = "icon", extra = ""): string {
   if (!isIconName(name)) throw new Error(`Unknown icon "${name}". Add it to src/build/icons.ts.`);
-  return `<svg class="${cls}${extra ? " " + extra : ""}" viewBox="0 0 24 24" aria-hidden="true">${ICON_PATHS[name]}</svg>`;
+  return `<svg class="${cls} icon-${name}${extra ? " " + extra : ""}" viewBox="0 0 24 24" aria-hidden="true">${ICON_PATHS[name]}</svg>`;
 }

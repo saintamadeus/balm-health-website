@@ -29,13 +29,20 @@ test("parsePage explains what is wrong with a broken page", () => {
 });
 
 test("icon() draws a known icon and refuses an unknown one", () => {
-  assert.match(icon("heart"), /^<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">/);
+  assert.match(icon("heart"), /^<svg class="icon icon-heart" viewBox="0 0 24 24" aria-hidden="true">/);
   assert.throws(() => icon("hart"), /Unknown icon "hart"/);
 });
 
 test("art() only accepts the four brand colours", () => {
   assert.match(art("green", "bed", "Label"), /art-green.*frame-label">Label/s);
   assert.throws(() => art("purple", "bed"), /Unknown art colour/);
+});
+
+test("scenes draw a known picture with a description, and refuse unknown names", () => {
+  const out = expandShortcodes("{{scene:basket:Ongoing}}");
+  assert.match(out, /<svg viewBox="0 0 400 300"[^>]*role="img" aria-label="Drawing of/);
+  assert.match(out, /frame-label">Ongoing</);
+  assert.throws(() => expandShortcodes("{{scene:garden}}"), /Unknown scene "garden"/);
 });
 
 test("shortcodes expand contact details from config", () => {

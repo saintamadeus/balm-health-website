@@ -64,3 +64,19 @@ test("Get Help offers call and WhatsApp buttons", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Call now" })).toHaveAttribute("href", /^tel:\+234/);
   await expect(page.getByRole("link", { name: "Open WhatsApp" })).toHaveAttribute("href", /^https:\/\/wa\.me\/234/);
 });
+
+test("a green tick appears once an email is typed correctly", async ({ page }) => {
+  await page.goto("/contact.html");
+  const email = page.locator("#email");
+  await email.fill("not-an-email");
+  await expect(email).not.toHaveClass(/is-valid/);
+  await email.fill("someone@example.com");
+  await expect(email).toHaveClass(/is-valid/);
+});
+
+test("WhatsApp button floats on Get Help with a message ready to send", async ({ page }) => {
+  await page.goto("/get-help.html");
+  const wa = page.locator(".wa-float");
+  await expect(wa).toBeVisible();
+  await expect(wa).toHaveAttribute("href", /^https:\/\/wa\.me\/234\d+\?text=/);
+});
