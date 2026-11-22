@@ -197,5 +197,6 @@ describe("help and contact details", () => {
 
   test("the safeguarding page names who receives reports", () => {
     assert.match(html.get("safeguarding-policy.html")!, /Safeguarding Lead, <strong>Comfort Oluremilekun Samuel<\/strong>/);
+    assert.match(html.get("safeguarding-policy.html")!, /speak with <strong>Olubunmi Ajegunmo<\/strong>, one of our trustees/);
   });
 });

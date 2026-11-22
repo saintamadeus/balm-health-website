@@ -37,6 +37,12 @@ export const SAFEGUARDING_LEAD = {
   role: "Founder & Executive Director",
 } as const;
 
+/** A second person people can ask for about a safeguarding concern. */
+export const SAFEGUARDING_ALT = {
+  name: "Olubunmi Ajegunmo",
+  role: "Trustee",
+} as const;
+
 /** A WhatsApp chat link, optionally with a message already typed in for the visitor. */
 export function whatsappLink(message = ""): string {
   return `https://wa.me/${WHATSAPP}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
