@@ -70,7 +70,7 @@ export function header(active: string): string {
 
 <header class="site-header">
   <div class="header-bar">
-    <a class="brand" href="index.html" aria-label="The Balm — home">
+    <a class="brand" href="index.html">
       <img src="assets/images/logo_icon.png" alt="" width="46" height="50">
       <span class="brand-text">
         <span class="brand-name">THE BALM</span>

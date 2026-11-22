@@ -1,0 +1,6 @@
+{
+  // Settings for the tests. Browser tests also run code inside the page, so they need DOM types.
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "lib": ["ES2022", "DOM", "DOM.Iterable"] },
+  "include": ["./**/*.ts", "../playwright.config.ts", "../src/build/**/*.ts"]
+}
