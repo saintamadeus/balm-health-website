@@ -1,44 +1,79 @@
-# The Balm Health Initiative — Website (v4)
+# The Balm Health Initiative — Website
 
-Plain HTML, CSS and JavaScript. No framework. Built to be hosted on **Netlify** (free).
+Website for **The Balm Health Initiative and Social Intervention (TBHISI)**.
+Written in **TypeScript**, built into plain HTML/CSS/JS, hosted on **Netlify**.
+The live site has no framework and loads no outside scripts.
+
+## Commands
+
+```
+npm install        # once, after cloning
+npm start          # build the site and preview it at http://localhost:3000
+npm run build      # build the site into dist/
+npm run typecheck  # check all TypeScript for mistakes
+npm run check      # typecheck + build (run before pushing)
+```
 
 ## How the files fit together
 
 ```
-src/                 ← EDIT PAGES HERE (just the middle part of each page)
-build.py             ← run this after editing; it adds the header, footer and meta tags
-*.html               ← the finished pages (made by build.py — don't edit these by hand)
-assets/css/style.css ← all colours, fonts and layout
-assets/js/main.js    ← menu, animations, tabs, copy buttons, forms
-assets/fonts/        ← Fraunces (headings) + Figtree (text), stored on our own site
-assets/images/       ← logo, founder photo, certificates, icons, social share image
-netlify.toml         ← security + speed settings for Netlify
-sitemap.xml          ← list of pages for Google (made by build.py)
-robots.txt           ← tells search engines what to look at
-site.webmanifest     ← lets phones "add to home screen" with our logo
-.well-known/security.txt ← where to report a security problem
+src/
+  pages/           ← EDIT PAGE CONTENT HERE (just the middle part of each page)
+  client/main.ts   ← browser code: menu, animations, tabs, copy buttons, forms
+  build/
+    config.ts      ← site address, contact details, menu  ← change the domain here
+    layout.ts      ← <head>, header, footer shared by every page
+    icons.ts       ← every icon used on the site
+    shortcodes.ts  ← {{icon:...}} and {{art:...}} helpers
+    build.ts       ← puts it all together into dist/
+public/            ← copied as-is: CSS, fonts, images, favicon, web manifest
+dist/              ← the finished website (made by the build — never edit, not in git)
+netlify.toml       ← Netlify build + security + speed settings
+serve.json         ← keeps the local preview behaving like Netlify
 ```
 
-**To change a page:** edit the file in `src/`, then run:
+`npm run build` also writes `sitemap.xml`, `robots.txt` and `.well-known/security.txt`
+into `dist/`, using the address in `config.ts`.
+
+### Writing a page
+
+Each file in `src/pages/` starts with settings, then `---`, then the page body:
 
 ```
-python build.py
+title: Contact Us | The Balm Health Initiative, Ota, Ogun State
+description: One sentence for Google and link previews.
+nav: contact
+---
+<main id="main"> ... </main>
 ```
 
-**To change the header, footer or menu:** edit `build.py` (one place, all pages update).
+- `nav` highlights a menu item (`about`, `programs`, `stories`, `transparency`, `involved`,
+  `contact`), or use `donate`, `legal` or `404`.
+- `robots: noindex, follow` hides a page from Google (optional).
 
-## Before going live — checklist
+Shortcodes you can use in a body:
 
-1. **Domain.** When it's bought, change `SITE` at the top of `build.py`, and the address in
-   `robots.txt` and `.well-known/security.txt`. Run `python build.py`.
-2. **Deploy to Netlify.** Drag the whole folder onto app.netlify.com/drop, or connect GitHub.
-   Forms only work on Netlify (they use Netlify Forms).
-3. **Turn on form emails.** Netlify → Site → Forms → Notifications → "Email notification" for
-   `gift-confirmation`, `contact` and `updates`. Send them to thebalmhealthinitiative@gmail.com.
-4. **Google Search Console.** Add the site, then submit `sitemap.xml`.
-5. **Check security.** Paste the live address into securityheaders.com — it should score A.
-6. **Check speed.** Paste it into pagespeed.web.dev.
-7. Renew the date in `.well-known/security.txt` every year.
+| Shortcode | Makes |
+|---|---|
+| `{{icon:heart}}` | an inline icon (names are in `src/build/icons.ts`) |
+| `{{art:green:bed:Hospital visits}}` | a coloured placeholder panel with an icon and label. Colours: `green`, `coral`, `ochre`, `forest` |
+
+A wrong icon or colour name stops the build with a clear message, so typos never reach the site.
+
+**To change the header, footer or menu:** edit `src/build/layout.ts` or `src/build/config.ts`.
+Every page updates on the next build.
+
+## Going live — checklist
+
+1. **Netlify.** Add new site → Import from GitHub → pick this repo. Netlify reads `netlify.toml`,
+   so leave the build settings as they are (`npm run build`, publish `dist`).
+2. **Form emails.** Netlify → Site → Forms → Notifications → email for `gift-confirmation`,
+   `contact` and `updates`, to thebalmhealthinitiative@gmail.com.
+3. **Domain.** When it's bought: change `SITE` in `src/build/config.ts`, push, then add the
+   domain in Netlify → Domain management.
+4. **Google Search Console.** Add the site, then submit `/sitemap.xml`.
+5. **Check security** at securityheaders.com (should score A) and **speed** at pagespeed.web.dev.
+6. Renew `SECURITY_TXT_EXPIRES` in `config.ts` every year.
 
 ## How gift checking works (bank transfer)
 
@@ -49,14 +84,15 @@ python build.py
 
 Never accept a screenshot alone as proof — screenshots are easy to fake. Only the bank statement counts.
 
-**Later:** with Paystack you can get a dedicated account number or payment page that confirms
-transfers automatically and emails receipts. Swap it in when the NGO is ready.
+**Later:** Paystack can give a dedicated account number or payment page that confirms
+transfers automatically and emails receipts.
 
 ## Adding real photos
 
-Photo spots currently show coloured art panels. To use a real photo, add an `<img>` inside the
-`frame` div in `src/` — the art panel stays behind it as a backup if the photo fails to load.
+Photo spots currently show coloured art panels. To use a real photo, put it in
+`public/assets/images/` and add an `<img>` inside the `frame` div in `src/pages/`. The art
+panel stays behind it as a backup if the photo fails to load.
 Only publish photos of people who agreed in writing (see the safeguarding policy).
-Keep photos under ~300 KB (use squoosh.app to shrink them).
+Keep photos under ~300 KB (squoosh.app shrinks them).
 
-Adding a story: see the instructions inside `src/stories.html`.
+Adding a story: see the instructions inside `src/pages/stories.html`.

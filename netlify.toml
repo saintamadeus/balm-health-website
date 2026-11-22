@@ -2,8 +2,11 @@
 # These run on the server and protect visitors. Plain words in each comment.
 
 [build]
-  publish = "."
-  command = ""          # no build step needed on Netlify; run `python build.py` on your PC before pushing
+  command = "npm run build"   # Netlify installs packages, then builds the site into dist/
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
 
 # Show our own 404 page for any address that doesn't exist
 [[redirects]]
@@ -46,15 +49,3 @@
   for = "/assets/js/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
-
-# Keep the source and builder private
-[[redirects]]
-  from = "/src/*"
-  to = "/404.html"
-  status = 404
-  force = true
-[[redirects]]
-  from = "/build.py"
-  to = "/404.html"
-  status = 404
-  force = true

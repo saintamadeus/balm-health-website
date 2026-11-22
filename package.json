@@ -1,0 +1,22 @@
+{
+  "name": "balm-health-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for The Balm Health Initiative and Social Intervention (TBHISI)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsx src/build/build.ts",
+    "start": "npm run build && serve dist -c ../serve.json",
+    "typecheck": "tsc -p tsconfig.json && tsc -p src/client/tsconfig.json",
+    "check": "npm run typecheck && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "serve": "^14.2.8",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

@@ -53,10 +53,12 @@ nav: stories
 
   <!--
     HOW TO ADD A STORY (for whoever updates the site):
-    1. Copy the block below into src/stories.html, inside the "stories-grid" div.
-    2. Put the photo in assets/images/stories/ and change the src.
+    1. For the first story, add a new section just above this comment:
+         <section><div class="container"><div class="grid g3 rv-stagger"> ... </div></div></section>
+       Then paste the block below inside it (one block per story).
+    2. Put the photo in public/assets/images/stories/ and change the src.
     3. Only publish photos of people who agreed in writing (see safeguarding policy).
-    4. Run: python build.py
+    4. Run: npm run check, then commit and push. Netlify rebuilds the site.
 
     <article class="story-card">
       <div class="frame"><img src="assets/images/stories/YOUR-PHOTO.jpg" alt="Describe the photo" loading="lazy"></div>
