@@ -1,4 +1,4 @@
-import { EMAIL, NAV, ORG, PHONE, PHONE_TEL, SITE } from "./config.js";
+import { EMAIL, FACEBOOK, NAV, ORG, PHONE, PHONE_TEL, SITE, whatsappLink } from "./config.js";
 import { icon } from "./icons.js";
 
 /** The settings written at the top of each file in src/pages/. */
@@ -92,10 +92,10 @@ export function footer(active: string): string {
     active === "donate" || active === "404"
       ? ""
       : `
-<div class="give-bar" aria-hidden="false">
+<aside class="give-bar" aria-label="Donate">
   <span>Help someone get care today</span>
   <a class="btn btn-primary" href="donate.html">Donate</a>
-</div>`;
+</aside>`;
   return `
 <footer class="site-footer">
   <div class="container">
@@ -106,10 +106,17 @@ export function footer(active: string): string {
           <span>THE BALM</span>
         </div>
         <p>A registered health and social intervention NGO in Nigeria, improving health and wellbeing for vulnerable people and underserved communities.</p>
+        <ul class="foot-contact">
+          <li><a href="tel:${PHONE_TEL}">${icon("phone")} ${PHONE}</a></li>
+          <li><a href="${whatsappLink()}" rel="noopener">${icon("whatsapp")} WhatsApp us</a></li>
+          <li><a href="mailto:${EMAIL}">${icon("mail")} ${EMAIL}</a></li>${
+            FACEBOOK ? `\n          <li><a href="${FACEBOOK}" rel="noopener">${icon("facebook")} Facebook</a></li>` : ""
+          }
+        </ul>
         <p class="reg-line">Incorporated Trustees of The Balm Health Initiative and Social Interventions (TBHISI) &middot; CAC RN 9000092 &middot; <a href="financial-transparency.html">Registration &amp; compliance</a></p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h2 class="foot-h">Explore</h2>
         <ul class="foot-links">
           <li><a href="about.html">About us</a></li>
           <li><a href="leadership.html">Leadership &amp; board</a></li>
@@ -119,8 +126,9 @@ export function footer(active: string): string {
         </ul>
       </div>
       <div>
-        <h4>Take part</h4>
+        <h2 class="foot-h">Take part</h2>
         <ul class="foot-links">
+          <li><a href="get-help.html">Get help</a></li>
           <li><a href="donate.html">Donate</a></li>
           <li><a href="get-involved.html#volunteer">Volunteer</a></li>
           <li><a href="get-involved.html#partner">Partner with us</a></li>
@@ -128,7 +136,7 @@ export function footer(active: string): string {
         </ul>
       </div>
       <div>
-        <h4>Policies</h4>
+        <h2 class="foot-h">Policies</h2>
         <ul class="foot-links">
           <li><a href="safeguarding-policy.html">Safeguarding</a></li>
           <li><a href="privacy-policy.html">Privacy</a></li>
@@ -138,7 +146,7 @@ export function footer(active: string): string {
     </div>
     <div class="foot-bottom">
       <span>&copy; <span data-year>2026</span> ${ORG}.</span>
-      <span>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State &middot; <a href="tel:${PHONE_TEL}" style="color:inherit">${PHONE}</a></span>
+      <span>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State</span>
     </div>
   </div>
 </footer>
@@ -176,6 +184,7 @@ export function orgJsonLd(): string {
       availableLanguage: "English",
     },
     areaServed: { "@type": "Country", name: "Nigeria" },
+    ...(FACEBOOK ? { sameAs: [FACEBOOK] } : {}),
     identifier: [
       { "@type": "PropertyValue", propertyID: "CAC", value: "RN 9000092" },
       { "@type": "PropertyValue", propertyID: "SCUML", value: "SC 281404687" },

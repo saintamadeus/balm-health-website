@@ -2,6 +2,7 @@ title: Contact Us | The Balm Health Initiative, Ota, Ogun State
 description: Contact The Balm Health Initiative and Social Intervention in Ota, Ogun State — phone, email and a message form for volunteering, partnerships, gifts and safeguarding concerns.
 nav: contact
 ---
+<main id="main">
   <div class="page-hero">
     <div class="container">
       <p class="crumb"><a href="index.html">Home</a> &rsaquo; Contact</p>
@@ -11,24 +12,27 @@ nav: contact
     </div>
   </div>
 
-<main id="main">
   <section>
     <div class="container contact-grid">
       <div class="rv">
         <div class="cinfo">
           <div class="ibadge">{{icon:pin}}</div>
-          <div><h3>Visit</h3><p>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State, Nigeria</p></div>
+          <div><h2 class="h3">Visit</h2><p>Progressive Egbusi Community, off Oladele, Bells Drive, Ota, Ogun State, Nigeria</p></div>
         </div>
         <div class="cinfo">
           <div class="ibadge coral">{{icon:phone}}</div>
-          <div><h3>Call</h3><p><a href="tel:+2349078524319">+234 907 852 4319</a></p></div>
+          <div><h2 class="h3">Call</h2><p><a href="{{tel}}">{{phone}}</a></p></div>
+        </div>
+        <div class="cinfo">
+          <div class="ibadge">{{icon:whatsapp}}</div>
+          <div><h2 class="h3">WhatsApp</h2><p><a href="{{whatsapp:Hello The Balm, }}" rel="noopener">Message us on WhatsApp</a><br><span class="muted">If a call doesn&rsquo;t go through, send a message here.</span></p></div>
         </div>
         <div class="cinfo">
           <div class="ibadge amber">{{icon:mail}}</div>
-          <div><h3>Email</h3><p><a href="mailto:thebalmhealthinitiative@gmail.com">thebalmhealthinitiative@gmail.com</a></p></div>
+          <div><h2 class="h3">Email</h2><p><a href="{{mailto}}">{{email}}</a></p></div>
         </div>
         <div class="callout coral">
-          <p><strong>Safeguarding concern?</strong> Call or email us and mark your message &ldquo;Safeguarding&rdquo;. Every report is taken seriously and handled in confidence. Read our <a href="safeguarding-policy.html">Safeguarding Policy</a>.</p>
+          <p><strong>Safeguarding concern?</strong> Call, WhatsApp or email us and mark your message &ldquo;Safeguarding&rdquo;. It goes to our Safeguarding Lead, {{safeguarding-lead}}. Every report is taken seriously and handled in confidence. Read our <a href="safeguarding-policy.html">Safeguarding Policy</a>.</p>
         </div>
       </div>
 
@@ -36,7 +40,7 @@ nav: contact
             data-success="Message sent — thank you. We usually reply within a few working days." novalidate>
         <input type="hidden" name="form-name" value="contact">
         <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-        <h3>Send us a message</h3>
+        <h2 class="h3">Send us a message</h2>
         <div class="row2">
           <div class="field">
             <label for="name">Full name</label>
