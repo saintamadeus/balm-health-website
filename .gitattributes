@@ -1,0 +1,12 @@
+# Store text files with Linux line endings (LF) in git, whatever computer edits them.
+# Stops Windows/Linux line-ending differences from showing up as "changed files".
+* text=auto eol=lf
+
+# Binary files: never touch
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
+*.pdf binary
