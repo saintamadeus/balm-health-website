@@ -195,8 +195,7 @@ describe("help and contact details", () => {
     assert.ok(!html.get("get-help.html")!.includes('class="give-bar"'));
   });
 
-  test("the safeguarding page names who receives reports", () => {
-    assert.match(html.get("safeguarding-policy.html")!, /Safeguarding Lead, <strong>Comfort Oluremilekun Samuel<\/strong>/);
-    assert.match(html.get("safeguarding-policy.html")!, /speak with <strong>Olubunmi Ajegunmo<\/strong>, one of our trustees/);
+  test("the safeguarding page gives an email for concerns", () => {
+    assert.match(html.get("safeguarding-policy.html")!, /email <a href="mailto:/);
   });
 });

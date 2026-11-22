@@ -1,4 +1,4 @@
-import { EMAIL, PHONE, PHONE_TEL, SAFEGUARDING_ALT, SAFEGUARDING_LEAD, whatsappLink } from "./config.js";
+import { EMAIL, PHONE, PHONE_TEL, whatsappLink } from "./config.js";
 import { icon } from "./icons.js";
 import { scene } from "./scenes.js";
 
@@ -39,10 +39,6 @@ const VALUES: Readonly<Record<string, string>> = {
   email: EMAIL,
   mailto: `mailto:${EMAIL}`,
   whatsapp: whatsappLink(),
-  "safeguarding-lead": SAFEGUARDING_LEAD.name,
-  "safeguarding-role": SAFEGUARDING_LEAD.role,
-  "safeguarding-alt": SAFEGUARDING_ALT.name,
-  "safeguarding-alt-role": SAFEGUARDING_ALT.role,
 };
 
 /**
@@ -52,7 +48,6 @@ const VALUES: Readonly<Record<string, string>> = {
  *   {{scene:NAME:Label}}        a drawn scene: hospital, journey, basket, summit (label optional)
  *   {{phone}} {{tel}} {{email}} {{mailto}} {{whatsapp}}   contact details from config.ts
  *   {{whatsapp:Message text}}   a WhatsApp link with a message already typed in
- *   {{safeguarding-lead}} {{safeguarding-role}} {{safeguarding-alt}} {{safeguarding-alt-role}}
  */
 export function expandShortcodes(body: string): string {
   const out = body

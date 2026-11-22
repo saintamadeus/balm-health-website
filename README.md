@@ -67,7 +67,6 @@ Shortcodes you can use in a body:
 | `{{phone}}` `{{email}}` | the phone number / email from `config.ts` |
 | `{{tel}}` `{{mailto}}` `{{whatsapp}}` | link addresses for calling, emailing, WhatsApp |
 | `{{whatsapp:Hello, I need help}}` | a WhatsApp link with that message already typed in |
-| `{{safeguarding-lead}}` | the Safeguarding Lead's name |
 
 A wrong icon, colour or shortcode name stops the build with a clear message, so typos never reach the site.
 So does a link to a page or `#section` that doesn't exist. `<!-- notes -->` in a page are removed from the

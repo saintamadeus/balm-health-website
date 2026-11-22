@@ -31,17 +31,6 @@ export const WHATSAPP = "2349078524319";
 /** Facebook page address. Leave empty ("") to hide the Facebook link everywhere. */
 export const FACEBOOK = "https://www.facebook.com/profile.php?id=61584213399979";
 
-/** The person who receives safeguarding reports. */
-export const SAFEGUARDING_LEAD = {
-  name: "Comfort Oluremilekun Samuel",
-  role: "Founder & Executive Director",
-} as const;
-
-/** A second person people can ask for about a safeguarding concern. */
-export const SAFEGUARDING_ALT = {
-  name: "Olubunmi Ajegunmo",
-  role: "Trustee",
-} as const;
 
 /** A WhatsApp chat link, optionally with a message already typed in for the visitor. */
 export function whatsappLink(message = ""): string {
